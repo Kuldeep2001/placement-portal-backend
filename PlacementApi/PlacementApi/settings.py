@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'django_filters',
     "corsheaders",
+    'djongo'
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -87,13 +88,26 @@ WSGI_APPLICATION = 'PlacementApi.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'college',
+    #     'USER': 'root',
+    #     'PASSWORD': os.environ.get("DATABASE_PASSWORD"),
+    #     'HOST': 'localhost',  
+    #     'PORT': '3306',
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'college',
-        'USER': 'root',
-        'PASSWORD': os.environ.get("DATABASE_PASSWORD"),
-        'HOST': 'localhost',  
-        'PORT': '3306',
+        'ENGINE': 'djongo',
+        'NAME': 'sakha-backend',
+        'CLIENT': {
+            'host': 'mongodb+srv://' + os.environ.get('MONGO_USER') + ':' + os.environ.get('MONGO_PASSWORD') + '@cluster0.qs3j3xk.mongodb.net/sakha-backend',
+            'username': os.environ.get('MONGO_USER'),
+            'password': os.environ.get('MONGO_PASSWORD'),
+            # 'authSource': 'admin',
+            # 'authMechanism': 'SCRAM-SHA-1',
+            # 'ssl': True,
+            # 'ssl_cert_reqs': 'CERT_NONE'
+        }
     }
 }
 
